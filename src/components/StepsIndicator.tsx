@@ -1,5 +1,5 @@
 
-import React from "react";
+import * as React from "react";
 import { Check, HelpCircle, FormInput, TrendingUp } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
