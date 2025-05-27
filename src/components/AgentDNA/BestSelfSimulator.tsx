@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -13,7 +12,8 @@ import {
   TrendingUp,
   Star,
   User,
-  CheckCircle
+  CheckCircle,
+  Mic
 } from 'lucide-react';
 
 export const BestSelfSimulator = () => {
