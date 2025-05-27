@@ -9,7 +9,66 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      credit_assessments: {
+        Row: {
+          assessment_date: string | null
+          created_at: string | null
+          employment_status: string | null
+          factors: Json | null
+          id: string
+          income: number | null
+          score: number
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          assessment_date?: string | null
+          created_at?: string | null
+          employment_status?: string | null
+          factors?: Json | null
+          id?: string
+          income?: number | null
+          score: number
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          assessment_date?: string | null
+          created_at?: string | null
+          employment_status?: string | null
+          factors?: Json | null
+          id?: string
+          income?: number | null
+          score?: number
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string | null
+          full_name: string | null
+          id: string
+          updated_at: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string | null
+          full_name?: string | null
+          id: string
+          updated_at?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
