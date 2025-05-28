@@ -1,7 +1,7 @@
-
 import { useAuth } from "@/contexts/AuthContext";
 import { UserDashboard } from "@/components/UserDashboard";
 import { AgentDNADashboard } from "@/components/AgentDNA/AgentDNADashboard";
+import { NavigationChatbot } from "@/components/NavigationChatbot";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Brain, ArrowRight, Shield, TrendingUp } from "lucide-react";
@@ -132,6 +132,9 @@ const Index = () => {
             </div>
           </div>
         </div>
+        
+        {/* Navigation Chatbot for non-authenticated users */}
+        <NavigationChatbot />
       </div>
     );
   }
