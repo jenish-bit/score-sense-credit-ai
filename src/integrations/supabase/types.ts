@@ -45,6 +45,42 @@ export type Database = {
         }
         Relationships: []
       }
+      products: {
+        Row: {
+          category: string | null
+          created_at: string | null
+          description: string | null
+          id: string
+          image_url: string | null
+          interest_rate: number | null
+          max_score: number | null
+          min_score: number | null
+          name: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          interest_rate?: number | null
+          max_score?: number | null
+          min_score?: number | null
+          name: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          interest_rate?: number | null
+          max_score?: number | null
+          min_score?: number | null
+          name?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
