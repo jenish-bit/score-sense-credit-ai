@@ -43,6 +43,7 @@ export const AgentDNADashboard = () => {
     conversionRate: 73,
     emotionalIntelligence: 89,
     communicationStyle: 'Story-driven with emotional connection',
+    todaysMood: 78,
     strengths: [
       'Exceptional empathy and active listening',
       'Natural storytelling ability',
@@ -187,11 +188,11 @@ export const AgentDNADashboard = () => {
           </TabsContent>
 
           <TabsContent value="wellness">
-            <EmotionalWellness />
+            <EmotionalWellness profile={mockProfile} />
           </TabsContent>
 
           <TabsContent value="products">
-            <PersonalizedProducts />
+            <PersonalizedProducts profile={mockProfile} />
           </TabsContent>
 
           <TabsContent value="mobile">
