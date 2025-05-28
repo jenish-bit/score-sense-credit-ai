@@ -15,13 +15,20 @@ import {
   Award,
   Zap,
   Users,
-  BarChart3
+  BarChart3,
+  Trophy,
+  Eye,
+  Smartphone
 } from 'lucide-react';
 import { BehavioralProfile } from './BehavioralProfile';
 import { RealTimeCoach } from './RealTimeCoach';
 import { BestSelfSimulator } from './BestSelfSimulator';
 import { PersonalizedProducts } from './PersonalizedProducts';
 import { EmotionalWellness } from './EmotionalWellness';
+import { CustomerIntelligence } from './CustomerIntelligence';
+import { GamificationDashboard } from './GamificationDashboard';
+import { SmartAutomation } from './SmartAutomation';
+import { AdvancedAnalytics } from './AdvancedAnalytics';
 
 export const AgentDNADashboard = () => {
   const { user } = useAuth();
@@ -41,7 +48,11 @@ export const AgentDNADashboard = () => {
   const tabs = [
     { id: 'overview', label: 'DNA Overview', icon: Brain },
     { id: 'coach', label: 'Live Coach', icon: Mic },
+    { id: 'intelligence', label: 'Customer Intel', icon: Eye },
     { id: 'simulator', label: 'Best Self', icon: Target },
+    { id: 'automation', label: 'Smart Tools', icon: Zap },
+    { id: 'analytics', label: 'Analytics', icon: BarChart3 },
+    { id: 'gamification', label: 'Achievements', icon: Trophy },
     { id: 'products', label: 'My Products', icon: Award },
     { id: 'wellness', label: 'Wellness', icon: Heart }
   ];
@@ -56,25 +67,27 @@ export const AgentDNADashboard = () => {
               <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-3">
                 <Brain className="text-blue-600" size={32} />
                 AgentDNA
-                <Badge variant="secondary" className="ml-2">Beta</Badge>
+                <Badge variant="secondary" className="ml-2">Pro</Badge>
               </h1>
-              <p className="text-gray-600 mt-1">Your AI-Powered Sales Alter-Ego</p>
+              <p className="text-gray-600 mt-1">Your AI-Powered Sales Alter-Ego - Complete Platform</p>
             </div>
             <div className="text-right">
               <p className="text-sm text-gray-500">Welcome back,</p>
               <p className="font-semibold text-gray-900">{user?.email?.split('@')[0] || 'Agent'}</p>
+              <Badge variant="outline" className="mt-1">Level: Gold Agent</Badge>
             </div>
           </div>
         </div>
 
-        {/* Quick Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        {/* Enhanced Quick Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-4 mb-6">
           <Card className="bg-gradient-to-r from-blue-500 to-blue-600 text-white">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-blue-100 text-sm">Conversion Rate</p>
                   <p className="text-2xl font-bold">{agentProfile.conversionRate}%</p>
+                  <p className="text-xs text-blue-200">+23% with AI</p>
                 </div>
                 <TrendingUp size={24} className="text-blue-200" />
               </div>
@@ -87,6 +100,7 @@ export const AgentDNADashboard = () => {
                 <div>
                   <p className="text-green-100 text-sm">EQ Score</p>
                   <p className="text-2xl font-bold">{agentProfile.emotionalIntelligence}</p>
+                  <p className="text-xs text-green-200">Top 15%</p>
                 </div>
                 <Heart size={24} className="text-green-200" />
               </div>
@@ -97,10 +111,11 @@ export const AgentDNADashboard = () => {
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-purple-100 text-sm">Weekly Progress</p>
-                  <p className="text-2xl font-bold">{agentProfile.weeklyProgress}%</p>
+                  <p className="text-purple-100 text-sm">AI Usage</p>
+                  <p className="text-2xl font-bold">89%</p>
+                  <p className="text-xs text-purple-200">Last 30 days</p>
                 </div>
-                <BarChart3 size={24} className="text-purple-200" />
+                <Brain size={24} className="text-purple-200" />
               </div>
             </CardContent>
           </Card>
@@ -109,22 +124,49 @@ export const AgentDNADashboard = () => {
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-orange-100 text-sm">Energy Level</p>
-                  <p className="text-2xl font-bold">{agentProfile.todaysMood}%</p>
+                  <p className="text-orange-100 text-sm">Rank</p>
+                  <p className="text-2xl font-bold">#7</p>
+                  <p className="text-xs text-orange-200">of 152</p>
                 </div>
-                <Zap size={24} className="text-orange-200" />
+                <Trophy size={24} className="text-orange-200" />
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-r from-pink-500 to-pink-600 text-white">
+            <CardContent className="p-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-pink-100 text-sm">Revenue Impact</p>
+                  <p className="text-2xl font-bold">₹1.2L</p>
+                  <p className="text-xs text-pink-200">This month</p>
+                </div>
+                <Award size={24} className="text-pink-200" />
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-r from-teal-500 to-teal-600 text-white">
+            <CardContent className="p-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-teal-100 text-sm">Time Saved</p>
+                  <p className="text-2xl font-bold">3.2h</p>
+                  <p className="text-xs text-teal-200">Today</p>
+                </div>
+                <Zap size={24} className="text-teal-200" />
               </div>
             </CardContent>
           </Card>
         </div>
 
-        {/* Navigation Tabs */}
-        <div className="flex space-x-1 mb-6 bg-white rounded-lg p-1 shadow-sm">
+        {/* Enhanced Navigation Tabs */}
+        <div className="flex space-x-1 mb-6 bg-white rounded-lg p-1 shadow-sm overflow-x-auto">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+              className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap ${
                 activeTab === tab.id
                   ? 'bg-blue-500 text-white shadow-sm'
                   : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
@@ -140,9 +182,20 @@ export const AgentDNADashboard = () => {
         <div className="space-y-6">
           {activeTab === 'overview' && <BehavioralProfile profile={agentProfile} />}
           {activeTab === 'coach' && <RealTimeCoach />}
+          {activeTab === 'intelligence' && <CustomerIntelligence />}
           {activeTab === 'simulator' && <BestSelfSimulator />}
+          {activeTab === 'automation' && <SmartAutomation />}
+          {activeTab === 'analytics' && <AdvancedAnalytics />}
+          {activeTab === 'gamification' && <GamificationDashboard />}
           {activeTab === 'products' && <PersonalizedProducts profile={agentProfile} />}
           {activeTab === 'wellness' && <EmotionalWellness profile={agentProfile} />}
+        </div>
+
+        {/* Mobile Quick Actions */}
+        <div className="fixed bottom-4 right-4 md:hidden">
+          <Button className="rounded-full w-12 h-12 bg-blue-600 hover:bg-blue-700">
+            <Smartphone size={20} />
+          </Button>
         </div>
       </div>
     </div>
