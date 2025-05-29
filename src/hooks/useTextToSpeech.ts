@@ -1,5 +1,5 @@
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 interface TextToSpeechHook {
   speak: (text: string, voice?: string) => void;
@@ -17,11 +17,18 @@ export const useTextToSpeech = (): TextToSpeechHook => {
     setVoices(availableVoices);
   }, []);
 
-  // Load voices when they become available
-  if (typeof window !== 'undefined') {
-    speechSynthesis.onvoiceschanged = loadVoices;
-    loadVoices();
-  }
+  // Load voices when component mounts and when they become available
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      speechSynthesis.onvoiceschanged = loadVoices;
+      loadVoices();
+      
+      // Cleanup function
+      return () => {
+        speechSynthesis.onvoiceschanged = null;
+      };
+    }
+  }, [loadVoices]);
 
   const speak = useCallback((text: string, voiceName?: string) => {
     if (speechSynthesis.speaking) {
