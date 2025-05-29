@@ -5,6 +5,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useAuth } from '@/contexts/AuthContext';
+import { useAgentProfile } from '@/hooks/useAgentProfile';
+import { useWellnessMetrics } from '@/hooks/useWellnessMetrics';
+import { useGamification } from '@/hooks/useGamification';
 import { CustomerIntelligence } from './CustomerIntelligence';
 import { BehavioralProfile } from './BehavioralProfile';
 import { RealTimeCoach } from './RealTimeCoach';
@@ -40,20 +43,24 @@ import {
 export const AgentDNADashboard = () => {
   const { user, signOut } = useAuth();
   const [activeTab, setActiveTab] = useState('overview');
+  const { profile } = useAgentProfile();
+  const { currentMetrics } = useWellnessMetrics();
+  const { achievements } = useGamification();
 
   const handleSignOut = async () => {
     await signOut();
   };
 
-  const mockProfile = {
+  // Use real data from backend or fallback to defaults
+  const displayProfile = profile || {
     personalityType: 'Empathetic Relationship Builder',
     conversionRate: 73,
     emotionalIntelligence: 89,
     communicationStyle: 'Story-driven with emotional connection',
-    todaysMood: 78,
+    todaysMood: currentMetrics?.mood_score || 78,
     strengths: [
       'Exceptional empathy and active listening',
-      'Natural storytelling ability',
+      'Natural storytelling ability', 
       'Strong emotional connection with customers',
       'Excellent at handling concerned customers'
     ],
@@ -64,6 +71,10 @@ export const AgentDNADashboard = () => {
       'Could be more assertive with pricing discussions'
     ]
   };
+
+  const completedAchievements = achievements.filter(a => a.completed).length;
+  const aiScore = profile?.conversion_rate || 96;
+  const activeInsights = 23; // This could come from coaching sessions
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
@@ -172,12 +183,12 @@ export const AgentDNADashboard = () => {
                   <div className="grid grid-cols-2 gap-4 mb-4">
                     <div className="p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg border border-blue-200">
                       <h4 className="font-medium text-blue-900">Today's AI Score</h4>
-                      <p className="text-3xl font-bold text-blue-600">96%</p>
+                      <p className="text-3xl font-bold text-blue-600">{aiScore}%</p>
                       <p className="text-sm text-blue-700">vs your best self</p>
                     </div>
                     <div className="p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-lg border border-green-200">
                       <h4 className="font-medium text-green-900">Active Insights</h4>
-                      <p className="text-3xl font-bold text-green-600">23</p>
+                      <p className="text-3xl font-bold text-green-600">{activeInsights}</p>
                       <p className="text-sm text-green-700">AI suggestions ready</p>
                     </div>
                   </div>
@@ -190,17 +201,20 @@ export const AgentDNADashboard = () => {
                     <div className="text-center p-3 bg-yellow-50 rounded-lg">
                       <Trophy className="mx-auto mb-1 text-yellow-600" size={20} />
                       <p className="text-xs font-medium">Achievements</p>
-                      <p className="text-xs text-gray-600">12 Unlocked</p>
+                      <p className="text-xs text-gray-600">{completedAchievements} Unlocked</p>
                     </div>
                     <div className="text-center p-3 bg-pink-50 rounded-lg">
                       <Heart className="mx-auto mb-1 text-pink-600" size={20} />
                       <p className="text-xs font-medium">Wellness</p>
-                      <p className="text-xs text-gray-600">Optimal</p>
+                      <p className="text-xs text-gray-600">
+                        {currentMetrics?.burnout_risk === 'low' ? 'Optimal' : 
+                         currentMetrics?.burnout_risk === 'medium' ? 'Good' : 'Monitor'}
+                      </p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
-              <BehavioralProfile profile={mockProfile} />
+              <BehavioralProfile profile={displayProfile} />
             </div>
           </TabsContent>
 
