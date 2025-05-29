@@ -16,6 +16,9 @@ import { EmotionalWellness } from './EmotionalWellness';
 import { PersonalizedProducts } from './PersonalizedProducts';
 import { MobileIntegration } from './MobileIntegration';
 import { AgentDNAChatbot } from './AgentDNAChatbot';
+import { ProactiveCoach } from './ProactiveCoach';
+import { RolePlaySimulator } from './RolePlaySimulator';
+import { GamificationHub } from './GamificationHub';
 import { 
   Brain, 
   TrendingUp, 
@@ -27,7 +30,11 @@ import {
   Smartphone,
   User,
   LogOut,
-  Home
+  Home,
+  Trophy,
+  Gamepad2,
+  MessageSquare,
+  Crown
 } from 'lucide-react';
 
 export const AgentDNADashboard = () => {
@@ -60,28 +67,34 @@ export const AgentDNADashboard = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-      {/* Header */}
-      <div className="bg-white shadow-sm border-b">
+      {/* Premium Header */}
+      <div className="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-3">
-              <Brain className="text-blue-600" size={32} />
+              <div className="relative">
+                <Brain className="text-white" size={32} />
+                <Crown size={16} className="absolute -top-1 -right-1 text-yellow-300" />
+              </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">AgentDNA</h1>
-                <p className="text-sm text-gray-600">Your AI-Powered Sales Alter-Ego</p>
+                <h1 className="text-2xl font-bold text-white">AgentDNA Premium</h1>
+                <p className="text-sm text-purple-100">Advanced AI-Powered Sales Intelligence Platform</p>
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white">
-                AI Coach Active
+              <Badge className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-1">
+                ⚡ AI Coach Pro Active
               </Badge>
-              <Button variant="outline" size="sm" asChild>
+              <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-3 py-1">
+                🎯 Premium Features
+              </Badge>
+              <Button variant="outline" size="sm" className="text-white border-white hover:bg-white hover:text-purple-600" asChild>
                 <a href="/">
                   <Home size={16} className="mr-2" />
-                  Back to Home
+                  Home
                 </a>
               </Button>
-              <Button variant="outline" size="sm" onClick={handleSignOut}>
+              <Button variant="outline" size="sm" className="text-white border-white hover:bg-white hover:text-purple-600" onClick={handleSignOut}>
                 <LogOut size={16} className="mr-2" />
                 Sign Out
               </Button>
@@ -92,75 +105,115 @@ export const AgentDNADashboard = () => {
 
       <div className="max-w-7xl mx-auto p-6">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-5 lg:grid-cols-10">
-            <TabsTrigger value="overview" className="text-xs">
-              <User size={16} className="mr-1" />
+          <TabsList className="grid w-full grid-cols-6 lg:grid-cols-12 gap-1">
+            <TabsTrigger value="overview" className="text-xs flex-col h-16">
+              <User size={16} className="mb-1" />
               Overview
             </TabsTrigger>
-            <TabsTrigger value="intelligence" className="text-xs">
-              <Brain size={16} className="mr-1" />
+            <TabsTrigger value="proactive" className="text-xs flex-col h-16">
+              <Brain size={16} className="mb-1" />
+              AI Coach
+            </TabsTrigger>
+            <TabsTrigger value="roleplay" className="text-xs flex-col h-16">
+              <Gamepad2 size={16} className="mb-1" />
+              Role Play
+            </TabsTrigger>
+            <TabsTrigger value="gamification" className="text-xs flex-col h-16">
+              <Trophy size={16} className="mb-1" />
+              Achievements
+            </TabsTrigger>
+            <TabsTrigger value="intelligence" className="text-xs flex-col h-16">
+              <Brain size={16} className="mb-1" />
               Intelligence
             </TabsTrigger>
-            <TabsTrigger value="coach" className="text-xs">
-              <TrendingUp size={16} className="mr-1" />
-              Coach
+            <TabsTrigger value="coach" className="text-xs flex-col h-16">
+              <TrendingUp size={16} className="mb-1" />
+              Real-Time
             </TabsTrigger>
-            <TabsTrigger value="simulator" className="text-xs">
-              <Target size={16} className="mr-1" />
+            <TabsTrigger value="simulator" className="text-xs flex-col h-16">
+              <Target size={16} className="mb-1" />
               Simulator
             </TabsTrigger>
-            <TabsTrigger value="gamification" className="text-xs">
-              <Users size={16} className="mr-1" />
+            <TabsTrigger value="social" className="text-xs flex-col h-16">
+              <Users size={16} className="mb-1" />
               Social
             </TabsTrigger>
-            <TabsTrigger value="analytics" className="text-xs">
-              <TrendingUp size={16} className="mr-1" />
+            <TabsTrigger value="analytics" className="text-xs flex-col h-16">
+              <TrendingUp size={16} className="mb-1" />
               Analytics
             </TabsTrigger>
-            <TabsTrigger value="automation" className="text-xs">
-              <Zap size={16} className="mr-1" />
+            <TabsTrigger value="automation" className="text-xs flex-col h-16">
+              <Zap size={16} className="mb-1" />
               Automation
             </TabsTrigger>
-            <TabsTrigger value="wellness" className="text-xs">
-              <Heart size={16} className="mr-1" />
+            <TabsTrigger value="wellness" className="text-xs flex-col h-16">
+              <Heart size={16} className="mb-1" />
               Wellness
             </TabsTrigger>
-            <TabsTrigger value="products" className="text-xs">
-              <ShoppingBag size={16} className="mr-1" />
-              Products
-            </TabsTrigger>
-            <TabsTrigger value="mobile" className="text-xs">
-              <Smartphone size={16} className="mr-1" />
+            <TabsTrigger value="mobile" className="text-xs flex-col h-16">
+              <Smartphone size={16} className="mb-1" />
               Mobile
             </TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="space-y-6">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <Card className="lg:col-span-2">
+              <Card className="lg:col-span-2 border-2 border-purple-200 bg-gradient-to-br from-white to-purple-50">
                 <CardHeader>
-                  <CardTitle>Welcome to AgentDNA</CardTitle>
+                  <CardTitle className="flex items-center gap-2">
+                    <Crown className="text-purple-600" size={20} />
+                    Welcome to AgentDNA Premium
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600 mb-4">
-                    Your complete AI-powered sales coaching platform is ready! Explore each feature to unlock your full potential.
+                    Your premium AI-powered sales coaching platform with voice intelligence, mood analysis, and predictive coaching is ready! 🚀
                   </p>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="p-3 bg-blue-50 rounded-lg">
-                      <h4 className="font-medium">Today's Performance</h4>
-                      <p className="text-2xl font-bold text-blue-600">92%</p>
-                      <p className="text-sm text-gray-600">vs your best self</p>
+                  <div className="grid grid-cols-2 gap-4 mb-4">
+                    <div className="p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg border border-blue-200">
+                      <h4 className="font-medium text-blue-900">Today's AI Score</h4>
+                      <p className="text-3xl font-bold text-blue-600">96%</p>
+                      <p className="text-sm text-blue-700">vs your best self</p>
                     </div>
-                    <div className="p-3 bg-green-50 rounded-lg">
-                      <h4 className="font-medium">AI Insights</h4>
-                      <p className="text-2xl font-bold text-green-600">15</p>
-                      <p className="text-sm text-gray-600">suggestions ready</p>
+                    <div className="p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-lg border border-green-200">
+                      <h4 className="font-medium text-green-900">Active Insights</h4>
+                      <p className="text-3xl font-bold text-green-600">23</p>
+                      <p className="text-sm text-green-700">AI suggestions ready</p>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-3 gap-3">
+                    <div className="text-center p-3 bg-purple-50 rounded-lg">
+                      <MessageSquare className="mx-auto mb-1 text-purple-600" size={20} />
+                      <p className="text-xs font-medium">Voice Coach</p>
+                      <p className="text-xs text-gray-600">Active</p>
+                    </div>
+                    <div className="text-center p-3 bg-yellow-50 rounded-lg">
+                      <Trophy className="mx-auto mb-1 text-yellow-600" size={20} />
+                      <p className="text-xs font-medium">Achievements</p>
+                      <p className="text-xs text-gray-600">12 Unlocked</p>
+                    </div>
+                    <div className="text-center p-3 bg-pink-50 rounded-lg">
+                      <Heart className="mx-auto mb-1 text-pink-600" size={20} />
+                      <p className="text-xs font-medium">Wellness</p>
+                      <p className="text-xs text-gray-600">Optimal</p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
               <BehavioralProfile profile={mockProfile} />
             </div>
+          </TabsContent>
+
+          <TabsContent value="proactive">
+            <ProactiveCoach />
+          </TabsContent>
+
+          <TabsContent value="roleplay">
+            <RolePlaySimulator />
+          </TabsContent>
+
+          <TabsContent value="gamification">
+            <GamificationHub />
           </TabsContent>
 
           <TabsContent value="intelligence">
@@ -175,7 +228,7 @@ export const AgentDNADashboard = () => {
             <BestSelfSimulator />
           </TabsContent>
 
-          <TabsContent value="gamification">
+          <TabsContent value="social">
             <GamificationDashboard />
           </TabsContent>
 
@@ -191,17 +244,13 @@ export const AgentDNADashboard = () => {
             <EmotionalWellness profile={mockProfile} />
           </TabsContent>
 
-          <TabsContent value="products">
-            <PersonalizedProducts profile={mockProfile} />
-          </TabsContent>
-
           <TabsContent value="mobile">
             <MobileIntegration />
           </TabsContent>
         </Tabs>
       </div>
 
-      {/* AI Chatbot */}
+      {/* Enhanced AI Chatbot */}
       <AgentDNAChatbot />
     </div>
   );
