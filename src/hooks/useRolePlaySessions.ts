@@ -34,7 +34,20 @@ export const useRolePlaySessions = () => {
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setSessions(data || []);
+      
+      const formattedSessions: RolePlaySession[] = (data || []).map(session => ({
+        id: session.id,
+        scenario_type: session.scenario_type,
+        difficulty_level: session.difficulty_level || 'beginner',
+        conversation_log: Array.isArray(session.conversation_log) ? session.conversation_log : [],
+        performance_score: session.performance_score,
+        feedback: session.feedback,
+        completed: session.completed || false,
+        duration_minutes: session.duration_minutes,
+        created_at: session.created_at || ''
+      }));
+      
+      setSessions(formattedSessions);
     } catch (error: any) {
       console.error('Error fetching role play sessions:', error);
       toast.error('Failed to fetch sessions');
@@ -62,10 +75,23 @@ export const useRolePlaySessions = () => {
         .single();
 
       if (error) throw error;
-      setCurrentSession(data);
+      
+      const formattedSession: RolePlaySession = {
+        id: data.id,
+        scenario_type: data.scenario_type,
+        difficulty_level: data.difficulty_level || 'beginner',
+        conversation_log: Array.isArray(data.conversation_log) ? data.conversation_log : [],
+        performance_score: data.performance_score,
+        feedback: data.feedback,
+        completed: data.completed || false,
+        duration_minutes: data.duration_minutes,
+        created_at: data.created_at || ''
+      };
+      
+      setCurrentSession(formattedSession);
       await fetchSessions();
       toast.success('Role play session started!');
-      return data;
+      return formattedSession;
     } catch (error: any) {
       console.error('Error starting role play session:', error);
       toast.error('Failed to start session');
@@ -84,12 +110,24 @@ export const useRolePlaySessions = () => {
 
       if (error) throw error;
       
+      const formattedSession: RolePlaySession = {
+        id: data.id,
+        scenario_type: data.scenario_type,
+        difficulty_level: data.difficulty_level || 'beginner',
+        conversation_log: Array.isArray(data.conversation_log) ? data.conversation_log : [],
+        performance_score: data.performance_score,
+        feedback: data.feedback,
+        completed: data.completed || false,
+        duration_minutes: data.duration_minutes,
+        created_at: data.created_at || ''
+      };
+      
       if (currentSession?.id === sessionId) {
-        setCurrentSession(data);
+        setCurrentSession(formattedSession);
       }
       
       await fetchSessions();
-      return data;
+      return formattedSession;
     } catch (error: any) {
       console.error('Error updating role play session:', error);
       toast.error('Failed to update session');

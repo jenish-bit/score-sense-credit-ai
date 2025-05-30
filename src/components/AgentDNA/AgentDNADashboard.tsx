@@ -51,20 +51,20 @@ export const AgentDNADashboard = () => {
     await signOut();
   };
 
-  // Use real data from backend or fallback to defaults
-  const displayProfile = profile || {
-    personalityType: 'Empathetic Relationship Builder',
-    conversionRate: 73,
-    emotionalIntelligence: 89,
-    communicationStyle: 'Story-driven with emotional connection',
+  // Create a unified profile object for components that expect it
+  const displayProfile = {
+    personalityType: profile?.personality_type || 'Empathetic Relationship Builder',
+    conversionRate: profile?.conversion_rate || 73,
+    emotionalIntelligence: profile?.emotional_intelligence || 89,
+    communicationStyle: profile?.communication_style || 'Story-driven with emotional connection',
     todaysMood: currentMetrics?.mood_score || 78,
-    strengths: [
+    strengths: profile?.strengths || [
       'Exceptional empathy and active listening',
       'Natural storytelling ability', 
       'Strong emotional connection with customers',
       'Excellent at handling concerned customers'
     ],
-    weaknesses: [
+    weaknesses: profile?.weaknesses || [
       'Sometimes avoids direct closing techniques',
       'Can get sidetracked by customer stories',
       'Needs improvement in objection handling',
@@ -255,7 +255,7 @@ export const AgentDNADashboard = () => {
           </TabsContent>
 
           <TabsContent value="wellness">
-            <EmotionalWellness profile={mockProfile} />
+            <EmotionalWellness profile={displayProfile} />
           </TabsContent>
 
           <TabsContent value="mobile">

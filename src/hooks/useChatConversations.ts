@@ -37,7 +37,16 @@ export const useChatConversations = () => {
         .order('updated_at', { ascending: false });
 
       if (error) throw error;
-      setConversations(data || []);
+      
+      const formattedConversations: ChatConversation[] = (data || []).map(conv => ({
+        id: conv.id,
+        conversation_type: conv.conversation_type || 'general',
+        messages: Array.isArray(conv.messages) ? conv.messages as ChatMessage[] : [],
+        created_at: conv.created_at || '',
+        updated_at: conv.updated_at || ''
+      }));
+      
+      setConversations(formattedConversations);
     } catch (error: any) {
       console.error('Error fetching conversations:', error);
       toast.error('Failed to fetch conversations');
@@ -67,7 +76,16 @@ export const useChatConversations = () => {
           .single();
 
         if (createError) throw createError;
-        conversation = newConv;
+        
+        const formattedConv: ChatConversation = {
+          id: newConv.id,
+          conversation_type: newConv.conversation_type || 'general',
+          messages: Array.isArray(newConv.messages) ? newConv.messages as ChatMessage[] : [message],
+          created_at: newConv.created_at || '',
+          updated_at: newConv.updated_at || ''
+        };
+        
+        conversation = formattedConv;
         setCurrentConversation(conversation);
       } else {
         // Update existing conversation
@@ -83,7 +101,16 @@ export const useChatConversations = () => {
           .single();
 
         if (updateError) throw updateError;
-        conversation = updatedConv;
+        
+        const formattedConv: ChatConversation = {
+          id: updatedConv.id,
+          conversation_type: updatedConv.conversation_type || 'general',
+          messages: Array.isArray(updatedConv.messages) ? updatedConv.messages as ChatMessage[] : updatedMessages,
+          created_at: updatedConv.created_at || '',
+          updated_at: updatedConv.updated_at || ''
+        };
+        
+        conversation = formattedConv;
         setCurrentConversation(conversation);
       }
 
